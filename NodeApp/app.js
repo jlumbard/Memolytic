@@ -7,6 +7,8 @@ const cors = require('cors');
 const path = require('path');
 
 const question = require('./routes/question.route'); // Imports routes for the question
+
+const user = require('./routes/user.route'); // Imports routes for the question
 const app = express();
 
 app.use(cors())
@@ -24,6 +26,7 @@ db.on('error', console.error.bind(console, 'MongoDB connection error:'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: false}));
 app.use('/question', question);
+app.use('/user', user);
 
 let port = 8080;
 
