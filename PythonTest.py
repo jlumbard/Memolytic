@@ -1,6 +1,6 @@
 import pymongo
 
-client = pymongo.MongoClient("mongodb+srv://Nick:<pword>@cluster0-pyhe1.gcp.mongodb.net/test?retryWrites=true&w=majority")
+client = pymongo.MongoClient("mongodb+srv://Nick:Katsiris@cluster0-pyhe1.gcp.mongodb.net/test?retryWrites=true&w=majority")
 mydb = client["test"]
 
 #this would be changed to the various types of records you're trying to query
