@@ -25,7 +25,7 @@ exports.question_create = function (req, res, next) {
             UserID: req.body.UserID,
             question: req.body.question,
             answer: req.body.answer,
-            date: req.body.date
+            date: new Date()
         }
     );
 
