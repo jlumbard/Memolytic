@@ -19,7 +19,7 @@ router.post('/create', user_controller.user_create);
 router.get('/:id', user_controller.user_details);
 //2, 3 -update a user's details - to be used to update quantity and loan period
 //would be curious if its preferred to have two methods for this, it is for SQL. 
-// router.put('/:id/update', user_controller.user_update);
+router.put('/:id/update', user_controller.user_update);
 //4 - Delete an item by ID
 router.delete('/:id/delete', user_controller.user_delete);
 

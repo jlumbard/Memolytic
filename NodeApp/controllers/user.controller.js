@@ -24,7 +24,14 @@ exports.user_create = function (req, res, next) {
         {
             name: req.body.name,
             email: req.body.email,
-            hashedPassword: req.body.password
+            hashedPassword: req.body.password,
+            Environmental : req.body.Environmental,
+            Emotional : req.body.Emotional,
+            Financial : req.body.Financial,
+            Social : req.body.Social,
+            Spiritual : req.body.Spiritual,
+            Physical : req.body.Physical,
+            Intellectual: req.body.Intellectual
         }
     );
 
@@ -43,16 +50,13 @@ exports.user_details = function (req, res, next) {
     })
 };
 
-// exports.user_update = function (req, res, next) {
+exports.user_update = function (req, res, next) {
 
-//     req.body.daysUntilDue = req.body.daysUntilDue;
-//     req.body.quantity = req.body.quantity;
-
-//     Product.findByIdAndUpdate(req.params.id, {$set: req.body}, function (err, product) {
-//         if (err) return next(err);
-//         res.send('user udpated.');
-//     });
-// };
+    Product.findByIdAndUpdate(req.params.id, {$set: req.body}, function (err, product) {
+        if (err) return next(err);
+        res.send('user udpated.');
+    });
+};
 
 exports.user_delete = function (req, res) {
   User.findByIdAndRemove(req.params.id, function (err) {
