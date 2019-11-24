@@ -1,0 +1,85 @@
+html {
+    min-height: 100%;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+    background: '#70bg32';
+    background-repeat:no-repeat;
+    background: -webkit-linear-gradient( to left top, #5694CD, #DB7080);
+    background: -moz-linear-gradient( to left top, #5694CD, #DB7080);
+    background: -ms-linear-gradient( to left top, #5694CD, #DB7080);
+    background: -o-linear-gradient( to left top, #5694CD, #DB7080);
+    background: linear-gradient( to left top,  #5694CD, #DB7080);
+    text-align: center;
+}
+
+#myChart{
+    width:80vh !important;
+    height:80vh !important;
+}
+#ChartWrapper{
+    text-align:center;
+    display: inline-block;
+}
+#title{
+    font-family: 'Open Sans';
+    color: rgba(255,255,255,0.5);
+    font-size: 3em;
+    margin:1em;
+}
+
+body {
+  margin: 0;
+}
+.wrapper {
+  height: 30vh;
+  align: center;
+  text-align: center;
+}
+.text {
+    
+    margin:0.2em;
+  color: rgba(200,200,200,0.9);
+  font-family: 'Open Sans', Verdana;
+  text-align: center;
+  display: none;
+  padding: 0.15rem 0.7rem;
+  background-color: rgba(255,255,255,0.2);
+  box-shadow: 7px 7px 5px rgba(0,0,0,0.2);
+  border-radius: 5px;
+  position: relative;
+  top: 40px;
+
+}
+
+span.text {
+    box-shadow:none;
+    background-color: rgba(255,255,255,0);
+    font-size:2em;
+    padding: 0px;
+    margin: 0px;
+    margin-top: -0.2em;
+}
+.anim-button {
+  margin-top: 5px;
+  background-color: #428bca;
+  color: white;
+  font-family: 'Raleway';
+  padding-top: 10px;
+  padding-bottom: 10px;
+  padding-left: 10px;
+  padding-right: 10px;
+  border-radius: 5px;
+  border: none;
+  align: center;
+}
+.arrows{
+    display:inline-block;
+    background-color: rgba(255,255,255,0.2);
+    box-shadow: 7px 7px 5px rgba(0,0,0,0.2);
+    border-radius: 5px;
+    padding: 0.2rem 0.2rem;
+    line-height: 0.6em;
+    cursor: pointer;
+}

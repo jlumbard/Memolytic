@@ -17,6 +17,7 @@ router.get('', question_controller.question_all);
 router.post('/create', question_controller.question_create);
 //6 - get a question by ID
 router.get('/:id', question_controller.question_details);
+router.get('/:user/user', question_controller.question_user);
 //2, 3 -update a question's details - to be used to update quantity and loan period
 //would be curious if its preferred to have two methods for this, it is for SQL. 
 // router.put('/:id/update', question_controller.question_update);

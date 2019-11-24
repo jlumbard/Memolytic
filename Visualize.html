@@ -1,0 +1,91 @@
+  
+<html>
+<head>
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.3/dist/Chart.bundle.min.js"></script>    
+  <link rel="stylesheet" type="text/css" href="styles.css">
+
+  <script>
+
+    
+window.onload = function(){
+      const urlParams = new URLSearchParams(window.location.search);
+      const myParam = urlParams.get('email');
+      console.log("email " + myParam);
+      restart();
+    }
+
+
+function restart(){
+  $('.text').css({'top': '40px'}),
+  $('.text').css({'display': 'none'}),
+  $('.text').animate({'top': 0}, {"duration":2000,"queue":false});
+  $('.text').fadeIn(2000);
+  $('.text').css({'display': 'inline-block'});
+}
+  </script>
+</head>
+<body>
+
+<div id="title">Thyme</div>
+
+<div class="wrapper">
+    <h1 class="text">Your last Entry:</h1>
+    <br>
+    <h2 class="text">Subheader text goes here!</h2>
+    <br>
+    <span class="text"><div class="arrows" onlick="back()"><</div>  <div class="arrows" onlick="back()">></div></span>
+  </div>
+
+
+
+<div id="ChartWrapper">
+<canvas id="myChart" width="400" height="400"></canvas>
+</div>
+
+</body>
+
+
+</html>
+<script>
+var ctx = document.getElementById('myChart').getContext('2d');
+
+var data=  {
+    labels: ['Environmental','Emotional','Financial','Social','Spiritual','Physical','Intellectual'],
+    datasets: [{
+        backgroundColor: "rgba(255,255,255,0.3)",
+        hoverBackgroundColor : "#FFFFFF",
+        data: [5, 5, 4, 2,2,4,5],
+        label: 'Your scores'
+    }],
+
+}
+
+var options = {
+    scale: {
+        angleLines: {
+            display: false
+        },
+        ticks: {
+          display:false,
+            maxTicksLimit: 5,
+        },
+        gridLines:{
+          color: "rgba(255,255,255,0.3)",
+          lineWidth:2,
+          zeroLineColor :"rgba(255,255,255,0.3)",
+          zeroLineWidth : 2
+        },
+    },
+        borderJoinStyle:'round',
+        bezierCurve: false,
+};
+
+var myRadarChart = new Chart(ctx, {
+    type: 'radar',
+    data: data,
+    options: options
+});
+</script>

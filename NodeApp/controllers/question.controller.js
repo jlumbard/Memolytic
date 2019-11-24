@@ -25,7 +25,7 @@ exports.question_create = function (req, res, next) {
             UserID: req.body.UserID,
             question: req.body.question,
             answer: req.body.answer,
-            date: req.body.date
+            date: new Date()
         }
     );
 
@@ -62,7 +62,16 @@ exports.question_delete = function (req, res) {
     })
 };
 
-
+exports.question_user = function (req, res) {
+    
+    console.log(req.params.user);
+    Question.find(
+        {UserID:req.params.user},
+        function (err, question){
+        if (err) return next(err);
+        res.send(question);
+    })
+};
 
 //I designed the below method to return all of the items.
 exports.question_all = function (req, res) {
