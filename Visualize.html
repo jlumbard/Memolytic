@@ -6,58 +6,237 @@
     <link href="https://fonts.googleapis.com/css?family=Open+Sans:300&display=swap" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.3/dist/Chart.bundle.min.js"></script>    
   <link rel="stylesheet" type="text/css" href="styles.css">
+  <link type="text/javascript" href="SCRIPT.js">
+  <title>M E M O L Y T I C</title>
 
   <script>
 
+var userID = "5dda1dc5c4f330078cbd8902";
+async function getUserData(ID)
+{
+    let header = new Headers({
+        'Access-Control-Allow-Origin':'*',
+        
+    });
+
+    let response = await fetch(
+        'https://smart-visitor-259902.appspot.com/user/' + ID,
+        { 
+            method: 'GET',
+            headers:header,
+        }
+    )
+    let data = await response.json();
+    console.log(data);
+    return data;
+}
+var environmentVar;
+var responses;
+async function popChart(email){
+    console.log("populating");
+
+    let data = await getUserData(userID);
+
+    console.log("data" + data);
+
+    environmentVar = [data["Environmental"], data["Emotional"], data["Financial"], data["Social"], data["Spiritual"], data["Physical"], data["Intellectual"]];
+    console.log("env "+ environmentVar);
+  }
+
+async function getQuestionData()
+{
+    let header = new Headers({
+        'Access-Control-Allow-Origin':'*',
+        
+    });
+
+    let response = await fetch(
+        'https://smart-visitor-259902.appspot.com/question/',
+        { 
+            method: 'GET',
+            headers:header,
+        }
+    )
+    let data = await response.json();
+    return data;
+}
     
-window.onload = function(){
+var totalItems = 20;
+var backwards = 0;
+var forwards = 0;
+
+function back(){
+ 
+ //  window.alert("clicked");
+   backwards++;
+   totalItems--;
+ 
+ while(totalItems == -1){
+   window.alert("You have reached the end.");
+   totalItems++;
+   backwards--;
+ }
+ decrementDate(backwards);
+ document.getElementById("someEntry").innerHTML = responses[totalItems];
+ 
+ 
+ }
+ 
+ function forward(){
+   forwards++;
+  totalItems++
+ 
+  while(totalItems == 22){
+   window.alert("You have reached the end.");
+   totalItems--;
+   forwards--;
+ }
+ 
+ incrementDate(backwards, forwards);
+ document.getElementById("someEntry").innerHTML = responses[totalItems];
+ 
+ }
+ 
+ function decrementDate(x){
+   
+   var today = new Date();
+ var dd = today.getDate();
+ var mm = today.getMonth()+1; //January is 0!
+ var yyyy = today.getFullYear();
+ 
+ 
+ dd = dd - x;
+ 
+ 
+ if(dd<10) {
+     dd = '0'+ dd
+ } 
+ 
+ if(mm < 10) {
+     mm = '0'+ mm
+ } 
+ 
+ var displayDate = yyyy + '-' + mm + '-' + dd;
+ 
+ 
+ document.getElementById("date").innerHTML=displayDate;
+ 
+ }
+ 
+ function incrementDate(x,y){
+   
+   var today = new Date();
+ var dd = today.getDate();
+ var mm = today.getMonth()+1; //January is 0!
+ var yyyy = today.getFullYear();
+ 
+ 
+ dd = dd - x;
+ 
+ dd = dd + y;
+ 
+ 
+ if(dd<10) {
+     dd = '0'+ dd
+ } 
+ 
+ if(mm < 10) {
+     mm = '0'+ mm
+ } 
+ 
+ var displayDate = yyyy + '-' + mm + '-' + dd;
+ 
+ 
+ document.getElementById("date").innerHTML=displayDate;
+ 
+ }
+
+
+window.onload = async function(){
+  
       const urlParams = new URLSearchParams(window.location.search);
       const myParam = urlParams.get('email');
       console.log("email " + myParam);
-      restart();
-    }
+
+      await popChart(myParam);
+
+      var ctx = document.getElementById('myChart').getContext('2d');
+
+      //now do the 
+
+      var questions = getQuestionData().then( function(questions){
+        
+      console.log(questions);
+      var questions2 = Array;
+
+      for (var i = 0; i < questions.length; i++){
+      // look for the entry with a matching `code` value
+      console.log(questions[i]);
+        if (questions[i].UserID == "99"){
+        }
+        else{
+          questions.splice(i,1);
+        }
+      }
+      
+      console.log("2"+typeof(questions));
+
+      var questions3 = questions.sort(function(a, b) {
+        return a.date <= b.date;});
+        console.log("3" + questions3);
+      console.log(questions3[questions3.length-1]);
+
+      responses = [
+    "I went on a really nice hike today",
+    "I saw a really cute dog today",
+    "The weather was really nice today",
+    "Just got some new clothes today, they are so nice",
+    "I'm making a lot of progress in the things that I really care about",
+    "Just got the new airpods, they are so cool",
+    "Finally got to spend some family time today since it's Thanksgiving",
+    "Just got the new Iphone, so excited to play with it",
+    "I learned a lot in class today and feel really great about that",
+    "I had a lot of energy today and felt really great.",
+    "Just bought a new puppy, he's so cute.",
+    "I had a really great time hiking with my friends today.",
+    "The Raptors won today, so exciting!",
+    "It was taco Tuesday today so that's always a good thing",
+    questions3[questions3.length-7].answer,
+    questions3[questions3.length-6].answer,
+    questions3[questions3.length-5].answer,
+    questions3[questions3.length-4].answer,
+    questions3[questions3.length-3].answer,
+    questions3[questions3.length-2].answer,
+    questions3[questions3.length-1].answer
+  ];
+
+  for( var j = 0 ; j<questions.length; j++){
+    responses.push(questions3[j].answer);
+  }
+
+  
+  console.log("LENGTH" + responses.length);
+  
+  console.log("" + responses);
 
 
-function restart(){
-  $('.text').css({'top': '40px'}),
-  $('.text').css({'display': 'none'}),
-  $('.text').animate({'top': 0}, {"duration":2000,"queue":false});
-  $('.text').fadeIn(2000);
-  $('.text').css({'display': 'inline-block'});
-}
-  </script>
-</head>
-<body>
 
-<div id="title">Thyme</div>
 
-<div class="wrapper">
-    <h1 class="text">Your last Entry:</h1>
-    <br>
-    <h2 class="text">Subheader text goes here!</h2>
-    <br>
-    <span class="text"><div class="arrows" onlick="back()"><</div>  <div class="arrows" onlick="back()">></div></span>
-  </div>
+document.getElementById("someEntry").innerText= responses[responses.length -1];
 
 
 
-<div id="ChartWrapper">
-<canvas id="myChart" width="400" height="400"></canvas>
-</div>
-
-</body>
+      });
 
 
-</html>
-<script>
-var ctx = document.getElementById('myChart').getContext('2d');
+      
 
-var data=  {
+data=  {
     labels: ['Environmental','Emotional','Financial','Social','Spiritual','Physical','Intellectual'],
     datasets: [{
         backgroundColor: "rgba(255,255,255,0.3)",
         hoverBackgroundColor : "#FFFFFF",
-        data: [5, 5, 4, 2,2,4,5],
+        data: environmentVar,
         label: 'Your scores'
     }],
 
@@ -69,6 +248,8 @@ var options = {
             display: false
         },
         ticks: {
+            suggestedMin: 1,
+            suggestedMax: 4,
           display:false,
             maxTicksLimit: 5,
         },
@@ -88,4 +269,44 @@ var myRadarChart = new Chart(ctx, {
     data: data,
     options: options
 });
+      restart();
+    }
+
+
+function restart(){
+  $('.text').css({'top': '40px'}),
+  $('.text').css({'display': 'none'}),
+  $('.text').animate({'top': 0}, {"duration":2000,"queue":false});
+  $('.text').fadeIn(2000);
+  $('.text').css({'display': 'inline-block'});
+}
+
+
+
+  </script>
+</head>
+<body>
+
+<div id="title">Memolytic</div>
+
+<div class="wrapper">
+    <h1 class="text" id="date">2019-11-24</h1>
+    <br>
+    <h2 class="text" id="someEntry">Today, I felt really intellectually challenged at Hack Western 6</h2>
+    <br>
+    <span class="text"><div class="arrows" onclick="back()"><</div>  <div class="arrows" onclick="forward()">></div></span>
+  </div>
+
+
+
+<div id="ChartWrapper">
+<canvas id="myChart" width="400" height="400"></canvas>
+</div>
+
+</body>
+
+
+</html>
+<script>
+
 </script>
